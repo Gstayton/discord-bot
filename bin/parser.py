@@ -93,7 +93,8 @@ Source code available at https://github.com/Gstayton/discord-bot
                 "Available roles: {0}".format(", ".join(whitelist))
             )
         elif args in whitelist:
-            await client.remove_roles(message.author, *revoke)
+            for role in revoke:
+                await client.remove_roles(message.author, role)
             await client.add_roles(message.author, target)
             return Payload(
                 PayloadType.CHAT_MESSAGE,
