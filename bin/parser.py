@@ -57,6 +57,13 @@ class Commands():
             helpText
             )
 
+    async def about(client, cmd, args, message):
+        "Information about this bot"
+        resp = """
+        This bot written and developed by Kosan Nicholas.
+        Source code available at https://github.com/Gstayton/discord-bot
+        """
+
     @staticmethod
     async def set_role(client, cmd, args, message):
         "Usage: {cmdChar}set_role <role>\nSet yourself to the selected role. Only certain roles on the server are allowed."
