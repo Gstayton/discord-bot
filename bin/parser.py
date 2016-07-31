@@ -60,9 +60,14 @@ class Commands():
     async def about(client, cmd, args, message):
         "Information about this bot"
         resp = """
-        This bot written and developed by Kosan Nicholas.
+        This bot written and developed by Kosan Nicholas.\n
         Source code available at https://github.com/Gstayton/discord-bot
         """
+
+        return Payload(
+            PayloadType.CHAT_MESSAGE,
+            resp
+        )
 
     @staticmethod
     async def set_role(client, cmd, args, message):
