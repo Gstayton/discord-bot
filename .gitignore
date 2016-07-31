@@ -1,0 +1,4 @@
+/bin/config.py
+*.pyc
+__pycache__/
+.ropeproject/
