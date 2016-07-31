@@ -81,19 +81,16 @@ Source code available at https://github.com/Gstayton/discord-bot
             'Ryuuji'
         ]
         roles = message.server.roles
-        revoke = []
         for role in roles:
             if role.name == args and role.name in whitelist:
                 target = role
-            if role.name in whitelist and not role.name == args:
-                revoke.append(role)
         if args == "":
             return Payload(
                 PayloadType.CHAT_MESSAGE,
                 "Available roles: {0}".format(", ".join(whitelist))
             )
         elif args in whitelist:
-            await client.remove_roles(message.author, *revoke)
+            await client.remove_roles(message.author, *whitelist)
             await client.add_roles(message.author, target)
             return Payload(
                 PayloadType.CHAT_MESSAGE,
