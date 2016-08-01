@@ -8,23 +8,23 @@ from parser import Chat, Payload, PayloadType, Commands
 from terminal import Terminal
 import config
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.ERROR)
 
 client = discord.Client()
 term = Terminal(client)
 
+parser = Chat()
+
 @client.event
-async def on_ready(self):
-    for server in client.servers:
-        print(server.id)
-    print("Logged in as \n {} \n {} \n------".format(client.user.name, client.user.id))
+async def on_ready():
+    pass
+
 @client.event
-async def on_message(self, message):
-    print("{}: {}".format(message.author, message.content))
+async def on_message(message):
     if message.author == client.user.name:
         return
     else:
-        payload = await self.parser.parse(client, message)
+        payload = await parser.parse(client, message)
 
     if payload.payloadType == PayloadType.CHAT_MESSAGE:
         await client.send_message(message.channel, payload.response)
