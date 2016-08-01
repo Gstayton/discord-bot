@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import discord
+import socket
 
 import concurrent.futures
 
@@ -29,11 +30,16 @@ async def on_message(message):
     if payload.payloadType == PayloadType.CHAT_MESSAGE:
         await client.send_message(message.channel, payload.response)
 
-async def main():
-    await client.start(config.token)
+async def main(loop):
+    try:
+        await client.start(config.token)
+    except socket.timeout:
+        loop.create_task(main(loop))
+        return
+
 
 executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
 loop = asyncio.get_event_loop()
-loop.create_task(client.start(config.token))
+loop.create_task(main(loop))
 loop.run_in_executor(executor, term.cmdloop)
 loop.run_forever()
