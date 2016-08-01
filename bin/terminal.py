@@ -13,3 +13,10 @@ class Terminal(cmd.Cmd):
     def do_server(self, arg):
         for server in self.client.servers:
             print(server.name + "\n")
+
+    def do_members(self, arg):
+        for member in self.client.get_all_members():
+            print("{} - {} : {}".format(member.server, member.name, member.id))
+
+    def emptyline(self):
+        print('')
