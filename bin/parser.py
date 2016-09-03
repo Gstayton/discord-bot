@@ -3,6 +3,7 @@ from enum import Enum
 from decimal import *
 import random
 
+
 class Payload:
     def __init__(self, payloadType, response, target=None, status=0):
         self.__dict__.update({
@@ -106,6 +107,31 @@ Source code available at https://github.com/Gstayton/discord-bot
                 "Selected role not available"
             )
 
+    @staticmethod
+    async def grab_avatar(client, cmd, args, message):
+        "Usage: {cmdChar}grab_avatar <user>\nReturns the URL to the users avatar"
+        print(args)
+        target = message.server.get_member_named(args)
+        print(message.author.display_name)
+        if target is None:
+            for member in message.server.members:
+                print(member.display_name)
+                if args.lower() == member.display_name.lower():
+                    target = member
+                    break
+            return Payload(
+                PayloadType.CHAT_MESSAGE,
+                "{} Sorry, I could not find {}!".format(message.author.mention,args)
+            )
+        url = target.avatar_url
+        return Payload(
+            PayloadType.CHAT_MESSAGE,
+            "{} Here's  the link to {}'s avatar: {}".format(
+                message.author.mention,
+                target.display_name,
+                url
+            )
+        )
 
 
 class Chat():
@@ -133,7 +159,6 @@ class Chat():
         else:
             cmd = msg[1:]
             args = ""
-        print("COMMAND : " + cmd)
         if cmd in self.commands:
             return await self.commands[cmd](client, cmd, args, message)
         else:
