@@ -3,7 +3,6 @@ from enum import Enum
 from decimal import *
 import random
 
-import db
 
 class Payload:
     def __init__(self, payloadType, response, target=None, status=0):
@@ -82,9 +81,6 @@ Source code available at https://github.com/Gstayton/discord-bot
             'Kitamura',
             'Ryuuji'
         ]
-        s = db.session
-        q = s.query(db.Server).filter(db.Server.server_id == message.server.id).join(db.User.server_id).filter(db.User.user_id == message.author.id)
-        print(q.first())
         roles = message.server.roles
         revoke = []
         for role in roles:
@@ -137,7 +133,6 @@ class Chat():
         else:
             cmd = msg[1:]
             args = ""
-        print("COMMAND : " + cmd)
         if cmd in self.commands:
             return await self.commands[cmd](client, cmd, args, message)
         else:
