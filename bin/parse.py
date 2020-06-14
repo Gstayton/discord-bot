@@ -34,7 +34,7 @@ class Commands:
 
     @staticmethod
     async def help(client, cmd, args, message):
-        "Display available commands"
+        "!Display available commands"
         func_list = [o for o in getmembers(Commands) if isfunction(o[1])]
         helpText = ""
         if args:
@@ -53,7 +53,7 @@ class Commands:
                 if getdoc(f[1])[0] == "!":
                     continue
                 else:
-                    helpText += Chat.cmdChar + f[0] + ", "
+                    helpText += Chat.cmdChar + f[0] + " "
 
             helpText += "\nFor more info, try {0}help [command]".format(Chat.cmdChar)
         await message.channel.send(helpText)
