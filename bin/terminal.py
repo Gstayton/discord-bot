@@ -3,7 +3,7 @@ import cmd
 import db
 
 class Terminal(cmd.Cmd):
-    prompt = ">"
+    prompt = ""
     cmdqueue = False
     file = None
 
