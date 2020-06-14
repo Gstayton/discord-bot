@@ -12,8 +12,8 @@ class Terminal(cmd.Cmd):
         self.client = client
 
     def do_servers(self, arg):
-        for server in self.client.guilds:
-            print(server.name)
+        for guild in self.client.guilds:
+            print(f"{guild.name} - {guild.id} - {guild.member_count}\n{[guild.name for guild in guild.roles]}")
 
     def do_members(self, arg):
         for member in self.client.get_all_members():
