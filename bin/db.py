@@ -45,4 +45,5 @@ class User(Base):
             self.username
         )
 
+
 Base.metadata.create_all(engine)
