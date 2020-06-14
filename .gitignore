@@ -4,3 +4,4 @@ __pycache__/
 .ropeproject/
 *.db
 /log/
+/venv/
