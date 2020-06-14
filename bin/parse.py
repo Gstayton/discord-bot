@@ -56,10 +56,9 @@ class Commands:
                     helpText += Chat.cmdChar + f[0] + ", "
 
             helpText += "\nFor more info, try {0}help [command]".format(Chat.cmdChar)
-        return Payload(
-            PayloadType.CHAT_MESSAGE,
-            helpText
-            )
+        await message.channel.send(helpText)
+
+
     @staticmethod
     async def about(client, cmd, args, message):
         """Information about this bot"""
