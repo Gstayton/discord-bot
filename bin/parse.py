@@ -71,7 +71,7 @@ Source code available at https://github.com/Gstayton/discord-bot
 
     @staticmethod
     async def avatar(client, cmd, args, message):
-        """Usage: {cmdChar}grab_avatar <user>\nReturns the URL to the users avatar"""
+        """Usage: {cmdChar}avatar <user>\nPosts users full size avatar\nLeave argument blank to fetch your own avatar"""
         print(f"args:{args}")
         e = discord.Embed()
         user = ""
