@@ -22,7 +22,7 @@ class Terminal(cmd.Cmd):
     def do_geticons(self, arg):
         for member in self.client.get_all_members():
             print(member.avatar)
-            print(member.avatar == None)
+            print(member.avatar is None)
 
     def emptyline(self):
         print('')
