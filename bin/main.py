@@ -9,13 +9,13 @@ import concurrent.futures
 import parse
 import EventActions
 # from parse import Chat, PayloadType, Commands
-from terminal import Terminal as TerminalFull
+import terminal
 
 import config
 
 parser = parse.Chat()
 
-class Terminal(TerminalFull):
+class Terminal(terminal.Terminal):
     prompt = ""
     cmdqueue = False
     file = None
