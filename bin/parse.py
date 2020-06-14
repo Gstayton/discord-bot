@@ -27,9 +27,9 @@ class PayloadType(Enum):
 
 class Commands:
     @staticmethod
-    async def _ping(client, cmd, args, message):
-        "Usage: {cmdChar}ping\nUsed to check if alive."
-        message.channel.send(f"pong {args}")
+    async def ping(client, cmd, args, message):
+        "!Usage: {cmdChar}ping\nUsed to check if alive."
+        await message.channel.send(f"pong {args}")
         return
 
     @staticmethod
@@ -50,7 +50,7 @@ class Commands:
         else:
             helpText = "Currently implemented commands: \n"
             for f in func_list:
-                if f[0][0] == "_":
+                if getdoc(f[1])[0] == "!":
                     continue
                 else:
                     helpText += Chat.cmdChar + f[0] + ", "
