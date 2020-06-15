@@ -90,7 +90,8 @@ Source code available at https://github.com/Gstayton/discord-bot
                     break
 
         e.set_author(name=user).set_image(url=url)
-        await message.channel.send(embed=e)
+        with message.channel.typing():
+            await message.channel.send(embed=e)
 
 
         print(message.author.display_name)
