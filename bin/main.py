@@ -36,6 +36,14 @@ term = Terminal(client)
 @client.event
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name="Visitor")
+    channel = next((channel for channel in member.guild.channels if channel.name == 'general'), None)
+    await channel.send(f"""Welcome {member.mention} !   If you do not 
+mind, could we have you type in your Player ID under the 
+#playerid-room.  From there, one of us will invite you in game if 
+we have not done so already! :slight_smile:  optionally, if or when 
+you feel comfortable, we have an #introduction  page that you can 
+use to break the ice with us and see your fellow Alliance members! 
+:slight_smile:  Enjoy!""")
     await member.add_roles(role)
 
 
