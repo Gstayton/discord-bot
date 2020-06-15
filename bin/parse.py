@@ -117,7 +117,11 @@ class Chat:
 
     async def parse(self, client, message):
         msg = message.content
-        if msg[0] != self.cmdChar:
+        try:
+            if msg[0] != self.cmdChar:
+                return
+        except:
+            print(f"unhandled error from '{msg}'")
             return
         if " " in msg:
             cmd = msg[1:msg.find(" ")]
