@@ -6,13 +6,13 @@ import importlib
 
 import concurrent.futures
 
-import parse
+import commands
 import EventActions
 import terminal
 
 import config
 
-parser = parse.Chat()
+parser = commands.Chat()
 
 class Terminal(terminal.Terminal):
     prompt = ""
@@ -21,8 +21,8 @@ class Terminal(terminal.Terminal):
 
     def do_reload(self, arg):
         global parser
-        importlib.reload(parse)
-        parser = parse.Chat()
+        importlib.reload(commands)
+        parser = commands.Chat()
         print("Parser reloaded")
 
 
