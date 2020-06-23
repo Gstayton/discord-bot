@@ -38,7 +38,7 @@ async def on_member_join(member):
     channel = next((channel for channel in member.guild.text_channels if channel.name == 'general'), None)
     linkable = next((channel for channel in member.guild.text_channels if channel.name == "playerid-room"))
     await channel.send(f"""Welcome {member.mention} ! Feel free to chat with other members, and if you'd like to
-join, simple head on over to {discord.utils.get(member.guild.text_channels, name='bot-chat').mention}, where you
+join, simple head on over to {linkable.mention}, where you
 can register your player-id with .playerid [player-id] !""")
     await member.add_roles(role)
 
