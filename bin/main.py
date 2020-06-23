@@ -37,13 +37,9 @@ async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name="Visitor")
     channel = next((channel for channel in member.guild.text_channels if channel.name == 'general'), None)
     linkable = next((channel for channel in member.guild.text_channels if channel.name == "playerid-room"))
-    await channel.send(f"""Welcome {member.mention} !   If you do not 
-mind, could we have you type in your Player ID under the 
-{linkable.mention}.  From there, one of us will invite you in game if 
-we have not done so already! :slight_smile:  optionally, if or when 
-you feel comfortable, we have an #introduction  page that you can 
-use to break the ice with us and see your fellow Alliance members! 
-:slight_smile:  Enjoy!""")
+    await channel.send(f"""Welcome {member.mention} ! Feel free to chat with other members, and if you'd like to
+join, simple head on over to {discord.utils.get(member.guild.text_channels, name='bot-chat').mention}, where you
+can register your player-id with .playerid [player-id] !""")
     await member.add_roles(role)
 
 
