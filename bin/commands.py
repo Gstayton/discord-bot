@@ -30,6 +30,7 @@ class Commands:
             player_id=args
         ))
         db.get_session().commit()
+        await message.channel.send(f"Registered {args} with your Discord profile")
 
     @staticmethod
     async def query_playerid(client, cmd, args, message: discord.Message):
