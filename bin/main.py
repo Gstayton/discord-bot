@@ -8,7 +8,6 @@ import concurrent.futures
 
 import parse
 import EventActions
-# from parse import Chat, PayloadType, Commands
 import terminal
 
 import config
@@ -36,10 +35,11 @@ term = Terminal(client)
 @client.event
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name="Visitor")
-    channel = next((channel for channel in member.guild.channels if channel.name == 'general'), None)
+    channel = next((channel for channel in member.guild.text_channels if channel.name == 'general'), None)
+    linkable = next((channel for channel in member.guild.text_channels if channel.name == "playerid-room"))
     await channel.send(f"""Welcome {member.mention} !   If you do not 
 mind, could we have you type in your Player ID under the 
-#playerid-room.  From there, one of us will invite you in game if 
+{linkable.mention}.  From there, one of us will invite you in game if 
 we have not done so already! :slight_smile:  optionally, if or when 
 you feel comfortable, we have an #introduction  page that you can 
 use to break the ice with us and see your fellow Alliance members! 
