@@ -28,7 +28,11 @@ class Terminal(terminal.Terminal):
 
 logging.basicConfig(level=logging.ERROR)
 
-client = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+intents.messages = True
+intents.typing = True
+client = discord.Client(intents=intents)
 term = Terminal(client)
 
 

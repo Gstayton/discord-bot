@@ -103,19 +103,19 @@ Source code available at https://github.com/Gstayton/discord-bot
 
         if args == "":
             user = message.author.display_name
-            url = message.author.avatar_url
+            url = message.author.display_avatar.url
         else:
             for member in message.guild.members:
                 print(member.display_name)
                 if args == member.display_name:
                     print("Found")
                     user = args
-                    url = member.avatar_url
+                    url = member.display_avatar.url
                     break
 
         e.set_author(name=user).set_image(url=url)
-        with message.channel.typing():
-            await message.channel.send(embed=e)
+        message.channel.typing()
+        await message.channel.send(embed=e)
 
 
         print(message.author.display_name)
@@ -124,7 +124,7 @@ Source code available at https://github.com/Gstayton/discord-bot
             if args == member.display_name:
                 print("Found")
                 e.set_author(name=args)
-                e.set_image(url=member.avatar_url)
+                e.set_image(url=member.display_avatar)
                 await message.channel.send(message.author.mention, embed=e)
                 return
 
