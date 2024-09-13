@@ -1,9 +1,8 @@
 from inspect import getmembers, isfunction, getdoc
 import discord
+import re
 
 import db
-
-
 
 class Commands:
     @staticmethod
@@ -99,9 +98,17 @@ class Chat:
     async def parse(self, client, message):
         msg = message.content
         try:
+            if any(ele in msg for ele in Passives.link_filters):
+                await Passives.filter(message)
+        except Exception as e:
+            print(e)
+            print(f"unhandled error in filter from '{msg}'")
+            return
+        try:
             if msg[0] != self.cmdChar:
                 return
-        except:
+        except Exception as e:
+            print(e)
             print(f"unhandled error from '{msg}'")
             return
         if " " in msg:
@@ -113,3 +120,21 @@ class Chat:
         if cmd in self.commands:
             return await self.commands[cmd](client, cmd, args, message)
         return
+
+
+class Passives:
+    link_filters = [
+        "twitter.com",
+        "x.com",
+    ]
+
+
+
+    @staticmethod
+    async def filter(message: discord.message):
+        msg: str = message.content
+        await message.edit(suppress=True)
+        res = re.sub("(http(s)?://)(twitter|x)\\.com", "https://fixupx.com", msg)
+        print(res)
+        #await message.channel.send(message.author.mention + " " +res, flags=4096)
+        await message.reply(res, mention_author=False)
