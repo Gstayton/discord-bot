@@ -13,50 +13,6 @@ class Commands:
         return
 
     @staticmethod
-    async def playerid(client: discord.Client, cmd, args, message: discord.Message):
-        """Register new playerid"""
-        if args == "":
-            await message.channel.send("Request must include a playerid")
-            return
-
-        q = db.get_session().query(db.PSO2User.user_id).filter(db.PSO2User.user_id==message.author.id)
-        if db.session.query(q.exists()).scalar():
-            await message.channel.send("User already registered")  # TODO: Add method to update user information
-            return
-        print(message.author.display_name)
-        db.get_session().add(db.PSO2User(
-            user_id=message.author.id,
-            username=f"{message.author.name}#{message.author.discriminator}",
-            player_id=args
-        ))
-        db.get_session().commit()
-        await message.channel.send(f"Registered {args} with your Discord profile")
-
-    @staticmethod
-    async def query_playerid(client, cmd, args, message: discord.Message):
-        """!nope"""
-        s = db.get_session()
-        r = s.query(db.PSO2User).filter_by(player_id=args).first()
-        print(r)
-        await message.channel.send(r)
-
-    @staticmethod
-    async def get_nonmembers(client: discord.Client, cmd, args, message: discord.Message):
-        """!Return users with a registered playerid, but still in the visitor role"""
-        s = db.get_session()
-        members = message.guild.members
-        users = []
-        v_role = discord.utils.get(message.guild.roles, name="Visitor")
-        for member in members:
-            r = s.query(db.PSO2User).filter_by(user_id=member.id).first()
-            if r is None:
-                continue
-            elif v_role in member.roles:
-                users.append(r)
-        await message.channel.send(f"Player_IDs: {[u.player_id for u in users]}")
-
-
-    @staticmethod
     async def help(client, cmd, args, message):
         "!Display available commands"
         func_list = [o for o in getmembers(Commands) if isfunction(o[1])]
