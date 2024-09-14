@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 class Commands:
     @staticmethod
     async def ping(client, cmd, args, message: discord.Message):
-        """Usage: {cmdChar}ping\nUsed to check if alive."""
+        """!Usage: {cmdChar}ping\nUsed to check if alive."""
         log.debug(message.created_at.time())
         if args:
             await message.channel.send(f"pong {args}")
