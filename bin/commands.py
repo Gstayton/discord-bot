@@ -2,20 +2,25 @@ from inspect import getmembers, isfunction, getdoc
 import discord
 import re
 import db
+import datetime
 
 import logging
 log = logging.getLogger(__name__)
 
 class Commands:
     @staticmethod
-    async def ping(client, cmd, args, message):
-        """!Usage: {cmdChar}ping\nUsed to check if alive."""
-        await message.channel.send(f"pong {args}")
+    async def ping(client, cmd, args, message: discord.Message):
+        """Usage: {cmdChar}ping\nUsed to check if alive."""
+        log.debug(message.created_at.time())
+        if args:
+            await message.channel.send(f"pong {args}")
+        else:
+            await message.channel.send(f"pong {message.created_at.replace(tzinfo=None).timestamp() - datetime.datetime.now().replace(tzinfo=None).timestamp()}")
         return
 
     @staticmethod
     async def help(client, cmd, args, message):
-        "!Display available commands"
+        """Display available commands"""
         func_list = [o for o in getmembers(Commands) if isfunction(o[1])]
         help_text = ""
         if args:
