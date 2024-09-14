@@ -15,7 +15,9 @@ class Commands:
         if args:
             await message.channel.send(f"pong {args}")
         else:
-            await message.channel.send(f"pong {message.created_at.replace(tzinfo=None).timestamp() - datetime.datetime.now().replace(tzinfo=None).timestamp()}")
+            await message.channel.send(
+                f"pong {message.created_at.replace(tzinfo=None).timestamp() - datetime.datetime.now().replace(tzinfo=None).timestamp()}"
+            )
         return
 
     @staticmethod
