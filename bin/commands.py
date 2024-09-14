@@ -60,7 +60,7 @@ Source code available at https://github.com/Gstayton/discord-bot
     @staticmethod
     async def avatar(client, cmd, args, message):
         """Usage: {cmdChar}avatar <user>\nPosts users full size avatar\nLeave argument blank to fetch your own avatar"""
-        print(f"args:{args}")
+        log.info(f"args:{args}")
         e = discord.Embed()
         user = ""
         url = ""
@@ -70,9 +70,7 @@ Source code available at https://github.com/Gstayton/discord-bot
             url = message.author.display_avatar.url
         else:
             for member in message.guild.members:
-                print(member.display_name)
                 if args == member.display_name:
-                    print("Found")
                     user = args
                     url = member.display_avatar.url
                     break
@@ -80,17 +78,6 @@ Source code available at https://github.com/Gstayton/discord-bot
         e.set_author(name=user).set_image(url=url)
         message.channel.typing()
         await message.channel.send(embed=e)
-
-
-        print(message.author.display_name)
-        for member in message.guild.members:
-            print(member.display_name)
-            if args == member.display_name:
-                print("Found")
-                e.set_author(name=args)
-                e.set_image(url=member.display_avatar)
-                await message.channel.send(message.author.mention, embed=e)
-                return
 
 
 class Chat:
