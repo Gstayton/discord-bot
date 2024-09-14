@@ -54,17 +54,17 @@ async def on_message(message):
         await parser.parse(client, message)
 
 
-async def main(loop):
+async def main():
     try:
         await client.start(config.TOKEN)
     except socket.timeout:
-        loop.create_task(main(loop))
+        await asyncio.create_task(main())
         return
 
 
 if __name__ == "__main__":
     executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
-    loop = asyncio.get_event_loop()
-    loop.create_task(main(loop))
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     loop.run_in_executor(executor, term.cmdloop)
-    loop.run_forever()
+    asyncio.run(main())
