@@ -1,7 +1,5 @@
 import cmd
 
-import db
-
 import logging
 log = logging.getLogger(__name__)
 

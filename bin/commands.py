@@ -1,7 +1,6 @@
 from inspect import getmembers, isfunction, getdoc
 import discord
 import re
-import db
 import datetime
 
 import logging
