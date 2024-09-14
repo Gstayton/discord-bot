@@ -2,6 +2,10 @@ import cmd
 
 import db
 
+import logging
+log = logging.getLogger(__name__)
+
+
 class Terminal(cmd.Cmd):
     prompt = ""
     cmdqueue = False

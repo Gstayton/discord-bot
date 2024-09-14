@@ -1,16 +1,20 @@
 import asyncio
-import logging
 import discord
 import socket
 import importlib
+import os
 
 import concurrent.futures
 
 import commands
-import EventActions
 import terminal
 
 import config
+
+import logging
+
+logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
+log = logging.getLogger()
 
 parser = commands.Chat()
 
@@ -25,8 +29,6 @@ class Terminal(terminal.Terminal):
         parser = commands.Chat()
         print("Parser reloaded")
 
-
-logging.basicConfig(level=logging.ERROR)
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -43,7 +45,7 @@ async def on_member_join(member):
 
 @client.event
 async def on_ready():
-    print(f"Logged in as {client.user}")
+    log.info(f"Logged in as {client.user}")
 
 
 @client.event

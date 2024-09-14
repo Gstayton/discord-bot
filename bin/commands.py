@@ -1,8 +1,10 @@
 from inspect import getmembers, isfunction, getdoc
 import discord
 import re
-
 import db
+
+import logging
+log = logging.getLogger(__name__)
 
 class Commands:
     @staticmethod
