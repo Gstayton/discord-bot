@@ -70,7 +70,7 @@ Source code available at https://github.com/Gstayton/discord-bot
             url = message.author.display_avatar.url
         else:
             for member in message.guild.members:
-                if args == member.display_name:
+                if args.lower() == member.display_name.lower():
                     user = args
                     url = member.display_avatar.url
                     break
