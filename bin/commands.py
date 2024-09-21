@@ -92,6 +92,8 @@ class Chat:
 
     async def parse(self, client, message):
         msg = message.content
+        if not msg:
+            return
         try:
             if any(ele in msg for ele in Passives.link_filters):
                 await Passives.filter(message)
