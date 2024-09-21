@@ -128,8 +128,10 @@ class Passives:
     @staticmethod
     async def filter(message: discord.message):
         msg: str = message.content
-        await message.edit(suppress=True)
+        if msg.find("https://vxtwitter") or msg.find("http://vxtwitter"):
+            return
         res = re.sub("(http(s)?://)(twitter|x)\\.com", "https://fixupx.com", msg)
+        await message.edit(suppress=True)
         print(res)
         #await message.channel.send(message.author.mention + " " +res, flags=4096)
         await message.reply(res, mention_author=False)
